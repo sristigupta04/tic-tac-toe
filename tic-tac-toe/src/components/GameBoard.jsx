@@ -1,7 +1,7 @@
 import Cell from "./Cell";
-import Scoreboard from "./ScoreBoard";
-
-
+import Scoreboard from "./Scoreboard";
+import Navbar from "./Navbar";
+import ModeSelector from "./ModeSelector";
 //this contain the board logic 
 //ye kaise  konse index pr jayega 
 
@@ -12,20 +12,35 @@ import Scoreboard from "./ScoreBoard";
       O: 0,
       draw: 0
    };
+    const mode = "pvp";
+
+   const setMode = (newMode) => {
+      console.log(newMode);
+   };
+
  return (
+  <div className="conatiner">
+   
+    <Navbar/>
     <div className="board">
-               <ScoreBoard scores={scores} />
+
+         <ModeSelector
+            mode={mode}
+            setMode={setMode}
+         />
+
+               <Scoreboard scores={scores} />
 
         {
             board.map((cell ,index ) => {
-          <button  key = {index} className="cell" onclick={() =>
+          <button  key = {index} className="cell" onclick={(e) =>
                      console.log(index)
           }>  </button>
 
             }
         )
         }
-    </div>
+    </div></div>
  )
 }
 
