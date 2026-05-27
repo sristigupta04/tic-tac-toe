@@ -1,9 +1,8 @@
-import Gameboard from './components/GameBoard'
-
-
+import Home from "./pages/Home";
 function App() {
-   return <Gameboard/>
-   
+
+   return <Home />;
+
 }
 
-export default App
+export default App;

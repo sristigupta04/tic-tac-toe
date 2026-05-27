@@ -1,11 +1,15 @@
-// ik box cell ka jo multiple box banyega 
-//  jisme srif handle hoga  style 
-function Cell({value,onClick}) {
-        return(
-            <button  className="cell" onClick={onclick}>{value}</button>
-        )    
+//cell button jsiko click krne me funciton return hoga har ik chiz ka 
+
+function Cell({
+    value,
+    onclick,
+    isWinningCell
+})
+{
+    return (
+
+        <button className= { isWinningCell ?"cell winn":'cell' }
+        onclick={onclick}>{value}</button>
+    )
+
 }
-
-export default Cell;
-
-// gameboard -> passeess-> cell s

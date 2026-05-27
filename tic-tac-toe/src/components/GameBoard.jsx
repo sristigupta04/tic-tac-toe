@@ -1,47 +1,78 @@
 import Cell from "./Cell";
-import Scoreboard from "./Scoreboard";
-import Navbar from "./Navbar";
-import ModeSelector from "./ModeSelector";
-//this contain the board logic 
-//ye kaise  konse index pr jayega 
 
- function Gameboard() {
- const board = ["", "", "", "", "", "", "", "", ""];
- const scores = {
-      X: 0,
-      O: 0,
-      draw: 0
-   };
-    const mode = "pvp";
+import useGameLogic from "../hooks/useGameLogic";
 
-   const setMode = (newMode) => {
-      console.log(newMode);
-   };
+function GameBoard() {
 
- return (
-  <div className="conatiner">
-   
-    <Navbar/>
-    <div className="board">
+   const {
+      board,
+      currentPlayer,
+      handleClick,
+      winner,
+      score,
+   winningCells,
+   resetGame
+   } = useGameLogic();
 
-         <ModeSelector
-            mode={mode}
-            setMode={setMode}
-         />
+   return (
 
-               <Scoreboard scores={scores} />
+      <div>
 
-        {
-            board.map((cell ,index ) => {
-          <button  key = {index} className="cell" onclick={(e) =>
-                     console.log(index)
-          }>  </button>
+<div className="scoreboard">
+   <h2> scoreboard</h2>
+   <div className="score">
+         <p>X : {scores.X}</p>
 
+               <p>O : {scores.O}</p>
+
+               <p>Draw : {scores.draw}</p>
+
+   </div>
+</div>
+         {
+            winner ? (
+
+               <h2 className="current-player">
+                  Winner : {winner}
+               </h2>
+
+            ) : (
+
+               <h2 className="current-player">
+                  Current Player : {currentPlayer}
+               </h2>
+
+            )
+            
+            
+         }
+
+         <div className="board">
+
+            {
+               board.map((cell, index) => (
+
+                  <Cell
+                     key={index}
+                     value={cell}
+                     onClick={() => handleClick(index)}
+                  />
+
+               ))
             }
-        )
-        }
-    </div></div>
- )
+        
+         </div>
+             <button
+            className="reset-btn"
+            onClick={resetGame}
+         >
+            Reset Game
+         </button>
+
+
+      </div>
+
+   );
 }
 
-export default Gameboard;
+export default GameBoard;
