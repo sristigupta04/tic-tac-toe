@@ -9,7 +9,7 @@
     return (
 
         <button className= { isWinningCell ?"cell winn":'cell' }
-        onClick={onClick}>{value}</button>
+        onClick={onclick}>{value}</button>
     )
 
 }

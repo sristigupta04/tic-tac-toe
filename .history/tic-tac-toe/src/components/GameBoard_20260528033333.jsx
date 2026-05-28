@@ -23,7 +23,7 @@ function GameBoard() {
    <div className="score">
          <p>X : {score.X}</p>
 
-               <p>O : {score.Y}</p>
+               <p>O : {score.O}</p>
 
                <p>Draw : {score.draw}</p>
 

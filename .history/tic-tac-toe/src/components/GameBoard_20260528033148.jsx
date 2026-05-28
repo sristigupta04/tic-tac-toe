@@ -21,11 +21,11 @@ function GameBoard() {
 <div className="scoreboard">
    <h2> scoreboard</h2>
    <div className="score">
-         <p>X : {score.X}</p>
+         <p>X : {scores.X}</p>
 
-               <p>O : {score.Y}</p>
+               <p>O : {scores.O}</p>
 
-               <p>Draw : {score.draw}</p>
+               <p>Draw : {scores.draw}</p>
 
    </div>
 </div>

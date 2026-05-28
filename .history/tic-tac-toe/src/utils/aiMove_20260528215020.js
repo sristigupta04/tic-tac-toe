@@ -12,8 +12,8 @@ function getRandomMove(board){
 
 const random ={
     Math.floor(Math.random() * empty.length)
-
 }
+
 return empty[random]
 
 

@@ -11,7 +11,7 @@ const winners = [
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6]
-];c
+];
 
 const resetButton = document.querySelector(".reset");
 const boxes = document.querySelectorAll(".box");

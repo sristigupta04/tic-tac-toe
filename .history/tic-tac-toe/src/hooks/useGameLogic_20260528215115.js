@@ -93,14 +93,6 @@ setWinningCells(result.winningCells);
       setCurrentPlayer('X')
    }
 
-
-    if (mode === 'easy'){
-      const ai = getRandomMove(newBoard);
-      if(ai !== undefined){
-         newBoard[ai] = 'O';
-         setBoard([...newBoard])
-      }
-    }
    return {
       board,
       currentPlayer,

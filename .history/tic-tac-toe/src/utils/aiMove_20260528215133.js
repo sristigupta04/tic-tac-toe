@@ -12,7 +12,22 @@ function getRandomMove(board){
 
 const random ={
     Math.floor(Math.random() * empty.length)
+}
 
+// AI move
+if (mode === "easy") {
+
+   const aiIndex =
+      getRandomMove(newBoard);
+
+   // stop if undefined
+   if (aiIndex !== undefined) {
+
+      newBoard[aiIndex] = "O";
+
+      setBoard([...newBoard]);
+
+   }
 }
 return empty[random]
 

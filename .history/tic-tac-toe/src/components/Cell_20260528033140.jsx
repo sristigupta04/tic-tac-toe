@@ -2,14 +2,14 @@
 
  export function Cell({
     value,
-    onClick,
+    onclick,
     isWinningCell
 })
 {
     return (
 
         <button className= { isWinningCell ?"cell winn":'cell' }
-        onClick={onClick}>{value}</button>
+        onclick={onclick}>{value}</button>
     )
 
 }

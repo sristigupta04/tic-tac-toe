@@ -1,5 +1,6 @@
 
 
+
 function getRandomMove(board){
     const empty =[];
     for (let i =0; i<board.length; i++){
@@ -8,16 +9,4 @@ function getRandomMove(board){
             empty.push(i)
         }
     }
-
-
-const random ={
-    Math.floor(Math.random() * empty.length)
-
 }
-return empty[random]
-
-
-
-
-}
-export default getRandomMove;

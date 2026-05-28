@@ -1,5 +1,5 @@
 import { useState } from "react";
-import getRandomMove from "../utils/aiMove";
+
 import checkWinner from "../utils/checkWinner";
 
 function useGameLogic() {
@@ -8,8 +8,6 @@ function useGameLogic() {
    const [board, setBoard] = useState(
       ["", "", "", "", "", "", "", "", ""]
    );
-   //mode 
-   const [mode, setMode] = useState("pvp");
 // winig cell  coreing answer how kmuch they achieve 
 const [winningCells, setWinningCells] =
    useState([]);
@@ -93,14 +91,6 @@ setWinningCells(result.winningCells);
       setCurrentPlayer('X')
    }
 
-
-    if (mode === 'easy'){
-      const ai = getRandomMove(newBoard);
-      if(ai !== undefined){
-         newBoard[ai] = 'O';
-         setBoard([...newBoard])
-      }
-    }
    return {
       board,
       currentPlayer,
@@ -108,9 +98,7 @@ setWinningCells(result.winningCells);
       winner,
       score,
       winningCells,
-      resetGame,
-      mode,
-setMode
+      resetGame
    };
 }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import getRandomMove from "../utils/aiMove";
+
 import checkWinner from "../utils/checkWinner";
 
 function useGameLogic() {
@@ -8,8 +8,6 @@ function useGameLogic() {
    const [board, setBoard] = useState(
       ["", "", "", "", "", "", "", "", ""]
    );
-   //mode 
-   const [mode, setMode] = useState("pvp");
 // winig cell  coreing answer how kmuch they achieve 
 const [winningCells, setWinningCells] =
    useState([]);
@@ -20,7 +18,7 @@ const [winningCells, setWinningCells] =
    // winner state
    const [winner, setWinner] = useState(null);
  //  score state 
-  const [ score, setscores]  = useState({
+  const [ score, setscore]  = useState({
    X:0,
    Y:0,
    draw:0
@@ -57,14 +55,14 @@ const [winningCells, setWinningCells] =
 setWinningCells(result.winningCells);
 
          if(result === 'X'){
-           setscores({
+           setscore({
             X:score.X +1,
             Y:score.Y,
             draw:score.draw
            }) 
          }
          else if( result === 'Y'){
-            setscores((prev ) =>({
+            setscore((prev ) =>({
                   X:score.X,
                   Y:score.y+1,
                   draw:score.draw
@@ -73,13 +71,13 @@ setWinningCells(result.winningCells);
        else {
              setScores({
          X: scores.X,
-         Y: scores.O,
+         O: scores.O,
          draw: scores.draw + 1
       });
    }
     // switch turnno
          setCurrentPlayer(
-            currentPlayer === "X" ? "Y" : "X"
+            currentPlayer === "X" ? "O" : "X"
          );
 
       }
@@ -93,14 +91,6 @@ setWinningCells(result.winningCells);
       setCurrentPlayer('X')
    }
 
-
-    if (mode === 'easy'){
-      const ai = getRandomMove(newBoard);
-      if(ai !== undefined){
-         newBoard[ai] = 'O';
-         setBoard([...newBoard])
-      }
-    }
    return {
       board,
       currentPlayer,
@@ -108,9 +98,7 @@ setWinningCells(result.winningCells);
       winner,
       score,
       winningCells,
-      resetGame,
-      mode,
-setMode
+      resetGame
    };
 }
 
