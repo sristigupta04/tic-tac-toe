@@ -1,7 +1,8 @@
 import { useState } from "react";
-import getRandomMove from "../utils/aiMove";
+import {getRandomMove , getHardMove } from "../utils/aiMove";
 import checkWinner from "../utils/checkWinner";
-
+import{Medium} from "../utils/aiMove"
+import Navbar from "../components/Navbar";
 function useGameLogic() {
 
    // board state
@@ -22,9 +23,9 @@ const [winningCells, setWinningCells] =
  //  score state 
   const [ score, setscores]  = useState({
    X:0,
-   Y:0,
+   O:0,
    draw:0
-  })
+  });
    // click handler
    const handleClick = (index) => {
       // stop if winner exists
@@ -34,7 +35,7 @@ const [winningCells, setWinningCells] =
 
       // stop overwrite
       if (board[index] !== "") {
-         onclick 
+         
          return ;
       }
      
@@ -51,56 +52,68 @@ const [winningCells, setWinningCells] =
       const result = checkWinner(newBoard);
  
       // if winner found
-      if (winner.result) {
-
-         setwinner(result.winner); 
+      if (result) {
+ setWinner(result.winner); 
 setWinningCells(result.winningCells);
 
-         if(result === 'X'){
+         if(result.winner === 'X'){
            setscores({
             X:score.X +1,
-            Y:score.Y,
+            O:score.O,
             draw:score.draw
-           }) 
+           });
          }
-         else if( result === 'Y'){
-            setscores((prev ) =>({
+         else if( result.winner === 'O'){
+            setscores({
                   X:score.X,
-                  Y:score.y+1,
+                  O:score.O+1,
                   draw:score.draw
-            }))
+            })
          }
-       else {
-             setScores({
-         X: scores.X,
-         Y: scores.O,
-         draw: scores.draw + 1
+         
+       else if (result.winner === "draw"){
+             setscores({
+         X: score.X,
+         O: score.O,
+         draw: score.draw + 1
       });
+       
    }
-    // switch turnno
-         setCurrentPlayer(
-            currentPlayer === "X" ? "Y" : "X"
+   return;
+      
+      }
+          setCurrentPlayer(
+            currentPlayer === "X" ? "O" : "X"
          );
 
-      }
    };
+//newgame 
+ const newGame = () => {
+   setBoard (
+      ["", "", "", "", "", "", "", "", ""]
+   );
+   setWinner(null);
+   setWinningCells([]);
+   setCurrentPlayer("X");
+ }
+
+
+   //reset game 
    const resetGame =() =>{
       setBoard(
            ["", "", "", "", "", "", "", "", ""]
       )
       setWinner(null)
-
-      setCurrentPlayer('X')
+       setWinningCells([]);
+      setCurrentPlayer('X');
+      setscores({
+      X:0,
+      O:0,
+      draw:0
+   });
    }
 
-
-    if (mode === 'easy'){
-      const ai = getRandomMove(newBoard);
-      if(ai !== undefined){
-         newBoard[ai] = 'O';
-         setBoard([...newBoard])
-      }
-    }
+   
    return {
       board,
       currentPlayer,
@@ -110,7 +123,8 @@ setWinningCells(result.winningCells);
       winningCells,
       resetGame,
       mode,
-setMode
+     setMode,
+     newGame
    };
 }
 

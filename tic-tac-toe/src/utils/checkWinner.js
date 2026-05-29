@@ -23,7 +23,7 @@ function checkWinner(board) {
 
          return {
          winner:board[a],
-         winning:[a,b,c]
+         winningCells:[a,b,c]
          }
       }
    }
@@ -32,8 +32,8 @@ function checkWinner(board) {
    if (!board.includes("")) {
 
       return{
-         winner:'draw',
-         isWinningCell:[]
+         winner:"draw",
+         winningCells:[]
       }
 
    }

@@ -2,37 +2,35 @@
 
 import Navbar from "../components/Navbar";
 import ModeSelector from "../components/ModeSelector";
-import ScoreBoard from "../components/ScoreBoard";
 import GameBoard from "../components/GameBoard";
+import useGameLogic from "../hooks/useGameLogic";
 import "../styles/app.css";
 function Home() {
 
-   const scores = {
-      X: 0,
-      O: 0,
-      draw: 0
-   };
-
-   const mode = "pvp";
-
-   const setMode = (newMode) => {
-      console.log(newMode);
-   };
+   const game = useGameLogic();
 
    return (
 
       <div className="home">
-
-         <Navbar />
-
-         <ModeSelector
-            mode={mode}
-            setMode={setMode}
+  
+           <Navbar
+            newGame={game.newGame}
+            resetGame={game.resetGame}
          />
 
-         <ScoreBoard scores={scores} />
+         <ModeSelector
+            mode={game.mode}
+            setMode={game.setMode}
+         />
 
-         <GameBoard />
+           <GameBoard
+           board={game.board}
+           currentPlayer={game.currentPlayer}
+           handleClick={game.handleClick}
+           winner={game.winner}
+           score={game.score}
+           winningCells={game.winningCells} />
+       
 
       </div>
 

@@ -1,15 +1,23 @@
-//cell button jsiko click krne me funciton return hoga har ik chiz ka 
+export function Cell({
+   value,
+   onClick,
+   isWinningCell
+}) {
 
- export function Cell({
-    value,
-    onClick,
-    isWinningCell
-})
-{
-    return (
+   return (
 
-        <button className= { isWinningCell ?"cell winn":'cell' }
-        onClick={onClick}>{value}</button>
-    )
+      <button
+         className={
+            isWinningCell
+            ? "cell winn"
+            : "cell"
+         }
+         onClick={onClick}
+      >
 
+         {value}
+
+      </button>
+
+   );
 }

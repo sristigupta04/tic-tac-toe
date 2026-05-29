@@ -2,17 +2,17 @@ import {Cell} from "./Cell";
 
 import useGameLogic from "../hooks/useGameLogic";
 
-function GameBoard() {
+function GameBoard( {
 
-   const {
       board,
       currentPlayer,
       handleClick,
       winner,
       score,
    winningCells,
-   resetGame
-   } = useGameLogic();
+   resetGame,
+   newGame
+   }) {
 
    return (
 
@@ -23,7 +23,7 @@ function GameBoard() {
    <div className="score">
          <p>X : {score.X}</p>
 
-               <p>O : {score.Y}</p>
+               <p>O : {score.O}</p>
 
                <p>Draw : {score.draw}</p>
 
@@ -56,20 +56,17 @@ function GameBoard() {
                      key={index}
                      value={cell}
                      onClick={() => handleClick(index)}
+                     isWinningCell={
+                        winningCells.includes(index)
+                     }
                   />
 
                ))
             }
         
          </div>
-             <button
-            className="reset-btn"
-            onClick={resetGame}
-         >
-            Reset Game
-         </button>
-
-
+             
+         
       </div>
 
    );

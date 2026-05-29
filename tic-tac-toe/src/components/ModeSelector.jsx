@@ -13,7 +13,7 @@ function ModeSelector({mode,setMode}){
                
            <option value='pvp'>Player vs player</option>
              <option value='easy'>Easy ai</option>
-               <option value='medium '>medium </option>
+               <option value='medium'>medium </option>
                <option value='hard'>superr hard </option>
 
            </select>
