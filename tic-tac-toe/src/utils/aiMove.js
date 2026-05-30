@@ -3,7 +3,7 @@ import { getBestMove } from "./minimax";
 export function getRandomMove(board){
     const empty =[];
     for (let i =0; i<board.length; i++){
-        if(board[i] === " ")
+        if(board[i] === "")
         {
             empty.push(i)
         }
@@ -24,7 +24,7 @@ return empty[random]
 
 export function Medium(board){
     for (let i=0; i<board.length; i++){
-        if(board[i] === " "){
+        if(board[i] === ""){
             const temp = [...board];
             temp[i] = 'O';
             const result = checkWinner(temp);
@@ -38,7 +38,7 @@ export function Medium(board){
 
 
 for(let i=0;i<board.length; i++){
-    if(board[i] == ''){
+    if(board[i] == ""){
         const temp = [... board]
         temp[i] = 'X';
         const result = checkWinner(temp);
