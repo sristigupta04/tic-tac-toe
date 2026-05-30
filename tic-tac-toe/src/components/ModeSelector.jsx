@@ -12,9 +12,9 @@ function ModeSelector({mode,setMode}){
             onChange={(e) => setMode(e.target.value)}>
                
            <option value='pvp'>Player vs player</option>
-             <option value='easy'>Easy ai</option>
-               <option value='medium'>medium </option>
-               <option value='hard'>superr hard </option>
+             <option value='easy'>Easy level AI</option>
+               <option value='medium'>Medium level  AI</option>
+               <option value='hard'>Hard level AI </option>
 
            </select>
         </div>
