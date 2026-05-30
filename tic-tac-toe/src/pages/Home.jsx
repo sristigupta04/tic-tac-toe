@@ -22,7 +22,7 @@ function Home() {
             mode={game.mode}
             setMode={game.setMode}
          />
-d
+
           <GameBoard
    board={game.board}
    currentPlayer={game.currentPlayer}

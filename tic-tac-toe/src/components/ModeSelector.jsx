@@ -7,7 +7,7 @@ function ModeSelector({mode,setMode}){
         <div className="mode">
             <h2>select mode </h2>
             <select  
-            placeholder =" LEVELS"
+      
             value={mode}
             onChange={(e) => setMode(e.target.value)}>
                
