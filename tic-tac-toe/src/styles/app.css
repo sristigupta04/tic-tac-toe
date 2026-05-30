@@ -234,8 +234,8 @@ body{
 
 /* X */
 
-.cell:has-text("X"){
-   color:#38bdf8;
+.cell:has-text("O"){
+   color:#f472b6;
 }
 
 /* WINNING */
