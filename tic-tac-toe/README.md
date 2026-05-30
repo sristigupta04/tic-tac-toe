@@ -1,12 +1,12 @@
 # 🎮 Tic Tac Toe AI
 
-A modern Tic Tac Toe game built with React featuring multiple AI difficulty levels, score tracking, winner highlighting, and a responsive UI.
+A modern Tic Tac Toe game built with **React + Vite** featuring multiple AI difficulty levels, match history, undo functionality, local storage persistence, winner animations, and a responsive dark-themed UI.
 
 ---
 
 ## 🚀 Live Demo
 
-🔗 https://YOUR-NETLIFY-LINK.netlify.app
+🔗 Netlify: YOUR_NETLIFY_LINK_HERE
 
 ---
 
@@ -14,94 +14,112 @@ A modern Tic Tac Toe game built with React featuring multiple AI difficulty leve
 
 ### Home Screen
 
-![Home](./screenshots/home.png)
+![Home](screenshots/home.png)
 
-### AI Mode
+### Winner Modal
 
-![AI Mode](./screenshots/ai-mode.png)
+![Winner](screenshots/winner.png)
 
-### Winner Screen
+### AI Gameplay
 
-![Winner](./screenshots/winner.png)
+![AI](screenshots/ai.png)
 
 ---
 
 ## ✨ Features
 
-### 🎯 Game Modes
-- Player vs Player
-- Easy AI (Random Moves)
-- Medium AI (Block & Win Strategy)
-- Hard AI (Minimax Algorithm)
-
-### 🏆 Gameplay
-- Winner Detection
-- Draw Detection
-- Winning Cell Highlight
-- Score Tracking
-- New Game
-- Reset Game
-
-### 🎨 UI Features
-- Responsive Design
-- Modern Dark Theme
-- Hover Effects
-- Mobile Friendly Layout
-
----
-
-## 🧠 AI Algorithms
-
-### Easy AI
-Randomly selects an empty cell.
-
-### Medium AI
-- Tries to win
-- Blocks player winning moves
-- Falls back to random move
-
-### Hard AI
-Uses the Minimax Algorithm to always choose the optimal move.
+* 🎯 Player vs Player Mode
+* 🤖 Easy AI (Random Moves)
+* 🧠 Medium AI (Winning & Blocking Logic)
+* 🔥 Hard AI (Minimax Algorithm)
+* 🏆 Winner Detection
+* 🎉 Confetti Celebration
+* 📊 Scoreboard Tracking
+* 📝 Match History
+* ↩️ Undo Move
+* 💾 Local Storage Support
+* 🌙 Modern Dark Theme
+* 📱 Fully Responsive Design
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Usage |
-|------------|--------|
-| React | Frontend |
-| JavaScript | Logic |
-| CSS3 | Styling |
-| Vite | Build Tool |
-| Netlify | Deployment |
+### Frontend
+
+* React
+* Vite
+* JavaScript
+* CSS3
+
+### Libraries
+
+* react-confetti
+* @uidotdev/usehooks
+
+---
+
+## 🧠 AI Algorithms
+
+### Easy Mode
+
+Random move generation.
+
+### Medium Mode
+
+* Attempts winning move
+* Blocks opponent winning move
+* Falls back to random move
+
+### Hard Mode
+
+Uses the **Minimax Algorithm** to always play the optimal move.
 
 ---
 
 ## 📂 Project Structure
 
-```bash
 src/
-│
+
 ├── components/
-│   ├── Cell.jsx
-│   ├── GameBoard.jsx
-│   ├── ModeSelector.jsx
-│   └── Navbar.jsx
+
+│ ├── Cell.jsx
+
+│ ├── GameBoard.jsx
+
+│ ├── ModeSelector.jsx
+
+│ ├── Navbar.jsx
+
+│ └── WinnerModal.jsx
+
 │
+
 ├── hooks/
-│   └── useGameLogic.js
+
+│ └── useGameLogic.js
+
 │
+
 ├── utils/
-│   ├── aiMove.js
-│   ├── minimax.js
-│   └── checkWinner.js
+
+│ ├── aiMove.js
+
+│ ├── minimax.js
+
+│ └── checkWinner.js
+
 │
+
 ├── pages/
-│   └── Home.jsx
+
+│ └── Home.jsx
+
 │
+
 └── styles/
-    └── app.css
-```
+
+└── app.css
 
 ---
 
@@ -110,7 +128,13 @@ src/
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/tic-tac-toe.git
+git clone https://github.com/sristigupta04/tic-tac-toe.git
+```
+
+Move into the project:
+
+```bash
+cd tic-tac-toe
 ```
 
 Install dependencies:
@@ -119,13 +143,13 @@ Install dependencies:
 npm install
 ```
 
-Run locally:
+Start development server:
 
 ```bash
 npm run dev
 ```
 
-Build project:
+Build for production:
 
 ```bash
 npm run build
@@ -135,22 +159,18 @@ npm run build
 
 ## 📈 Future Improvements
 
-- Local Storage
-- Sound Effects
-- Confetti Animation
-- Match History
-- Undo Move
-- Online Multiplayer (Socket.IO)
-- Dark / Light Theme Toggle
+* Multiplayer using Socket.IO
+* Online Matchmaking
+* Player Profiles
+* Leaderboards
+* Sound Effects
+* Theme Customization
+* Tournament Mode
 
 ---
 
-## 👩‍💻 Author
+## ⭐ Support
 
-**Sristi Gupta**
+If you found this project helpful, consider giving it a star on GitHub.
 
-GitHub: https://github.com/sristigupta04
-
----
-
-⭐ If you like this project, consider giving it a star.
+⭐ Star this repository to support the project.
