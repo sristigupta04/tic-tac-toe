@@ -1,34 +1,95 @@
-import { useState } from "react";
-import { getRandomMove, getHardMove, Medium } from "../utils/aiMove";
+import { useState, useEffect } from "react";
+import {
+   getRandomMove,
+   getHardMove,
+   Medium
+} from "../utils/aiMove";
+
 import checkWinner from "../utils/checkWinner";
 
 function useGameLogic() {
 
-   // board state
    const [board, setBoard] = useState(
       ["", "", "", "", "", "", "", "", ""]
    );
 
-   // mode state
-   const [mode, setMode] = useState("pvp");
+   const [mode, setMode] = useState(() => {
+      return localStorage.getItem("mode")
+         || "pvp";
+   });
 
-   // winning cells
    const [winningCells, setWinningCells] =
       useState([]);
 
-   // current player
    const [currentPlayer, setCurrentPlayer] =
       useState("X");
 
-   // winner
-   const [winner, setWinner] = useState(null);
+   const [winner, setWinner] =
+      useState(null);
 
-   // score
-   const [score, setscores] = useState({
-      X: 0,
-      O: 0,
-      draw: 0
-   });
+   const [history, setHistory] =
+      useState(() => {
+
+         const savedHistory =
+            localStorage.getItem("history");
+
+         return savedHistory
+            ? JSON.parse(savedHistory)
+            : [];
+
+      });
+
+   const [score, setscores] =
+      useState(() => {
+
+         const savedScore =
+            localStorage.getItem("score");
+
+         return savedScore
+            ? JSON.parse(savedScore)
+            : {
+                 X: 0,
+                 O: 0,
+                 draw: 0
+              };
+
+      });
+
+   const [moveHistory, setMoveHistory] =
+      useState([]);
+
+   // SAVE SCORE
+
+   useEffect(() => {
+
+      localStorage.setItem(
+         "score",
+         JSON.stringify(score)
+      );
+
+   }, [score]);
+
+   // SAVE HISTORY
+
+   useEffect(() => {
+
+      localStorage.setItem(
+         "history",
+         JSON.stringify(history)
+      );
+
+   }, [history]);
+
+   // SAVE MODE
+
+   useEffect(() => {
+
+      localStorage.setItem(
+         "mode",
+         mode
+      );
+
+   }, [mode]);
 
    const handleClick = (index) => {
 
@@ -36,21 +97,33 @@ function useGameLogic() {
 
       if (board[index] !== "") return;
 
+      setMoveHistory(prev => [
+         ...prev,
+         [...board]
+      ]);
+
       const newBoard = [...board];
 
       // HUMAN MOVE
+
       newBoard[index] = currentPlayer;
 
       setBoard(newBoard);
 
-      let result = checkWinner(newBoard);
+      const result =
+         checkWinner(newBoard);
 
       if (result) {
 
          setWinner(result.winner);
-         setWinningCells(result.winningCells);
 
-         if (result.winner === "X") {
+         setWinningCells(
+            result.winningCells
+         );
+
+         if (
+            result.winner === "X"
+         ) {
 
             setscores({
                X: score.X + 1,
@@ -58,9 +131,16 @@ function useGameLogic() {
                draw: score.draw
             });
 
+            setHistory(prev => [
+               "X Won",
+               ...prev
+            ]);
+
          }
 
-         else if (result.winner === "O") {
+         else if (
+            result.winner === "O"
+         ) {
 
             setscores({
                X: score.X,
@@ -68,9 +148,16 @@ function useGameLogic() {
                draw: score.draw
             });
 
+            setHistory(prev => [
+               "O Won",
+               ...prev
+            ]);
+
          }
 
-         else if (result.winner === "draw") {
+         else if (
+            result.winner === "draw"
+         ) {
 
             setscores({
                X: score.X,
@@ -78,12 +165,18 @@ function useGameLogic() {
                draw: score.draw + 1
             });
 
+            setHistory(prev => [
+               "Draw",
+               ...prev
+            ]);
+
          }
 
          return;
       }
 
       // AI MODES
+
       if (
          mode === "easy" ||
          mode === "medium" ||
@@ -93,18 +186,37 @@ function useGameLogic() {
          let aiMove;
 
          if (mode === "easy") {
-            aiMove = getRandomMove(newBoard);
+
+            aiMove =
+               getRandomMove(
+                  newBoard
+               );
+
          }
 
-         else if (mode === "medium") {
-            aiMove = Medium(newBoard);
+         else if (
+            mode === "medium"
+         ) {
+
+            aiMove =
+               Medium(newBoard);
+
          }
 
-         else if (mode === "hard") {
-            aiMove = getHardMove(newBoard);
+         else if (
+            mode === "hard"
+         ) {
+
+            aiMove =
+               getHardMove(
+                  newBoard
+               );
+
          }
 
-         if (aiMove !== undefined) {
+         if (
+            aiMove !== undefined
+         ) {
 
             newBoard[aiMove] = "O";
 
@@ -115,13 +227,17 @@ function useGameLogic() {
 
             if (result2) {
 
-               setWinner(result2.winner);
+               setWinner(
+                  result2.winner
+               );
 
                setWinningCells(
                   result2.winningCells
                );
 
-               if (result2.winner === "O") {
+               if (
+                  result2.winner === "O"
+               ) {
 
                   setscores({
                      X: score.X,
@@ -129,17 +245,29 @@ function useGameLogic() {
                      draw: score.draw
                   });
 
+                  setHistory(prev => [
+                     "O Won",
+                     ...prev
+                  ]);
+
                }
 
                else if (
-                  result2.winner === "draw"
+                  result2.winner ===
+                  "draw"
                ) {
 
                   setscores({
                      X: score.X,
                      O: score.O,
-                     draw: score.draw + 1
+                     draw:
+                        score.draw + 1
                   });
+
+                  setHistory(prev => [
+                     "Draw",
+                     ...prev
+                  ]);
 
                }
 
@@ -150,15 +278,43 @@ function useGameLogic() {
          return;
       }
 
-      // PVP MODE ONLY
+      // PVP
+
       setCurrentPlayer(
          currentPlayer === "X"
             ? "O"
             : "X"
       );
+
+   };
+
+   // UNDO
+
+   const undoMove = () => {
+
+      if (
+         moveHistory.length === 0
+      ) return;
+
+      const lastBoard =
+         moveHistory[
+            moveHistory.length - 1
+         ];
+
+      setBoard(lastBoard);
+
+      setMoveHistory(
+         moveHistory.slice(0, -1)
+      );
+
+      setWinner(null);
+
+      setWinningCells([]);
+
    };
 
    // NEW GAME
+
    const newGame = () => {
 
       setBoard(
@@ -170,9 +326,11 @@ function useGameLogic() {
       setWinningCells([]);
 
       setCurrentPlayer("X");
+
    };
 
    // RESET GAME
+
    const resetGame = () => {
 
       setBoard(
@@ -190,19 +348,29 @@ function useGameLogic() {
          O: 0,
          draw: 0
       });
+
+      setHistory([]);
+
    };
 
    return {
+
       board,
       currentPlayer,
       handleClick,
       winner,
       score,
       winningCells,
+
+      history,
+      undoMove,
+
       resetGame,
       newGame,
+
       mode,
       setMode
+
    };
 }
 

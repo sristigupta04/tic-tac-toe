@@ -1,34 +1,76 @@
-import {Cell} from "./Cell";
+import { Cell } from "./Cell";
+import Confetti from "react-confetti";
+import WinnerModal from "./WinnerModal";
+import { useWindowSize } from "@uidotdev/usehooks";
 
-import useGameLogic from "../hooks/useGameLogic";
-
-function GameBoard( {
-
-      board,
-      currentPlayer,
-      handleClick,
-      winner,
-      score,
+function GameBoard({
+   board,
+   currentPlayer,
+   handleClick,
+   winner,
+   score,
    winningCells,
-   resetGame,
-   newGame
-   }) {
+   newGame,
+   history,
+   undoMove
+}) {
+
+   const { width, height } = useWindowSize();
 
    return (
 
       <div>
 
-<div className="scoreboard">
-   <h2> scoreboard</h2>
-   <div className="score">
-         <p>X : {score.X}</p>
+         {
+            winner &&
+            winner !== "draw" && (
+               <Confetti
+                  width={width}
+                  height={height}
+                  recycle={false}
+                  numberOfPieces={400}
+               />
+            )
+         }
+
+         <WinnerModal
+            winner={winner}
+            newGame={newGame}
+         />
+
+         <div className="scoreboard">
+
+            <h2>Scoreboard</h2>
+
+            <div className="score">
+
+               <p>X : {score.X}</p>
 
                <p>O : {score.O}</p>
 
                <p>Draw : {score.draw}</p>
 
-   </div>
-</div>
+            </div>
+
+         </div>
+
+         <div className="history">
+
+            <h2>Recent Matches</h2>
+
+            {
+               history &&
+               history.map((item, index) => (
+
+                  <p key={index}>
+                     {item}
+                  </p>
+
+               ))
+            }
+
+         </div>
+
          {
             winner ? (
 
@@ -43,8 +85,6 @@ function GameBoard( {
                </h2>
 
             )
-            
-            
          }
 
          <div className="board">
@@ -63,10 +103,34 @@ function GameBoard( {
 
                ))
             }
-        
+
          </div>
-             
-         
+
+         <div
+            style={{
+               marginTop: "20px",
+               display: "flex",
+               gap: "10px",
+               justifyContent: "center"
+            }}
+         >
+
+            <button
+               className="reset-btn"
+               onClick={undoMove}
+            >
+               ↩ Undo Move
+            </button>
+
+            <button
+               className="reset-btn"
+               onClick={newGame}
+            >
+               New Game
+            </button>
+
+         </div>
+
       </div>
 
    );

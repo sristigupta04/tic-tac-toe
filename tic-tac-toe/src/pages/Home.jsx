@@ -12,7 +12,7 @@ function Home() {
    return (
 
       <div className="home">
-  
+       
            <Navbar
             newGame={game.newGame}
             resetGame={game.resetGame}
@@ -22,16 +22,18 @@ function Home() {
             mode={game.mode}
             setMode={game.setMode}
          />
-
-           <GameBoard
-           board={game.board}
-           currentPlayer={game.currentPlayer}
-           handleClick={game.handleClick}
-           winner={game.winner}
-           score={game.score}
-           winningCells={game.winningCells} />
-       
-
+d
+          <GameBoard
+   board={game.board}
+   currentPlayer={game.currentPlayer}
+   handleClick={game.handleClick}
+   winner={game.winner}
+   score={game.score}
+   winningCells={game.winningCells}
+   history={game.history}
+   undoMove={game.undoMove}
+   newGame={game.newGame}
+/>
       </div>
 
    );
