@@ -6,8 +6,7 @@ A modern Tic Tac Toe game built with **React + Vite** featuring multiple AI diff
 
 ## 🚀 Live Demo
 
-🔗 Netlify: YOUR_NETLIFY_LINK_HERE
-
+https://game-tictactoe-ai.netlify.app/
 ---
 
 ## 📸 Screenshots
